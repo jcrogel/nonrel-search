@@ -345,9 +345,9 @@ class SearchManager(models.Manager):
         attrs['__init__'] = __init__
 
         self._relation_index_model = type(
-            'RelationIndex_%s_%s_%s' % (self.model._meta.app_label,
+            str('RelationIndex_%s_%s_%s' % (self.model._meta.app_label,
                                         self.model._meta.object_name,
-                                        self.name),
+                                        self.name)),
             (models.Model,), attrs)
         self._relation_index_model.add_to_class(self.name, SearchManager(
             self.fields_to_index, splitter=self.splitter, indexer=self.indexer,
